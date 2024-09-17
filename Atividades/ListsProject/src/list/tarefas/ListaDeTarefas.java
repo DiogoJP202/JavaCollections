@@ -41,6 +41,7 @@ public class ListaDeTarefas {
 
     public static void main(String[] args){
         ListaDeTarefas listaDeTarefas = new ListaDeTarefas();
+
         System.out.println("O número total de elementos na lista é: " + listaDeTarefas.obterNumeroTotalTarefas());
 
         listaDeTarefas.adicionarTarefa("list.tarefas.Tarefa 01");
