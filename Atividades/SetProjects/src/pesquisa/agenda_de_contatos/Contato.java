@@ -1,4 +1,4 @@
-package agenda_de_contatos;
+package pesquisa.agenda_de_contatos;
 
 import java.util.Objects;
 

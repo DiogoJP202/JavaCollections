@@ -1,4 +1,4 @@
-package conjunto_de_palavras_unicas;
+package operacoes_basicas.conjunto_de_palavras_unicas;
 
 import java.util.Set;
 import java.util.HashSet;

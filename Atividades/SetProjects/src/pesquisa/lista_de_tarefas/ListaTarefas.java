@@ -1,4 +1,4 @@
-package lista_de_tarefas;
+package pesquisa.lista_de_tarefas;
 
 import java.util.Set;
 import java.util.HashSet;
