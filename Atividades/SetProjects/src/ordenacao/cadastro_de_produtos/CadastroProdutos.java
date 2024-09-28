@@ -17,9 +17,8 @@ public class CadastroProdutos {
 
     public Set<Produto> exibirProdutosPorNome(){
         // TreeSet permite deixar o conjuto organizado.
-        // TreeSet já organiza automaticamente o conjunto de acordo com o comparable
-        Set<Produto> produtosPorNome = new TreeSet<>(listaProdutos);
-        return produtosPorNome;
+        // TreeSet já organiza automaticamente o conjunto de acordo com o comparable.
+        return new TreeSet<>(listaProdutos);
     }
 
     public Set<Produto> exibirProdutosPorPreco(){
@@ -43,7 +42,9 @@ public class CadastroProdutos {
         for(Produto p : listaProdutos.exibirProdutosPorNome()){
             System.out.println(p);
         }
+
         System.out.println("---");
+
         System.out.println("Produtos por preço:");
         for(Produto p : listaProdutos.exibirProdutosPorPreco()){
             System.out.println(p);
