@@ -2,6 +2,7 @@ package pesquisa.estoque_produtos;
 
 import java.util.Map;
 import java.util.HashMap;
+//  Importação para manipular números decimais.
 import java.text.DecimalFormat;
 
 public class EstoqueProdutos {
@@ -12,10 +13,12 @@ public class EstoqueProdutos {
     }
 
     public void adicionarProdutor(long id, String nome, double preco, int qtd){
+        // Usando um id como chave e uma classe como valor.
         estoqueProdutos.put(id, new Produto(nome, preco, qtd));
     }
 
     public void imprimirProdutos(){
+        // inteiração sobre um map.
         for(Map.Entry<Long, Produto> p : estoqueProdutos.entrySet()){
             System.out.println(p.getKey() + " - " + p.getValue());
         }
@@ -23,17 +26,21 @@ public class EstoqueProdutos {
 
     public double calcularValorTotalEstoque(){
         double valorTotalEstoque = 0;
+        // Definindo um padrão para um número decimal, no caso, duas casas pós a vírgula.
         DecimalFormat df = new DecimalFormat("#.00");
         if(!estoqueProdutos.isEmpty()){
+            // inteiração sobre os valores da nossa lista map.
             for(Produto p : estoqueProdutos.values()){
                 valorTotalEstoque += p.getPreco() * p.getQtd();
             }
         }
+        // Retornando valor com apenas duas casas decímais pós vírgula.
         return Double.parseDouble(df.format(valorTotalEstoque));
     }
 
     public Produto obterProdutoMaisCaro(){
         Produto produtoMaisCaro = null;
+        // Pegando o menor valor de um decímal.
         double maiorPreco = Double.MIN_VALUE;
         if(!estoqueProdutos.isEmpty()){
             for(Produto p : estoqueProdutos.values()){
@@ -62,6 +69,7 @@ public class EstoqueProdutos {
 
     public Produto obterProdutoMaiorQuantidadeValorTotalNoEstoque(){
         Produto produtoMaisCaro = null;
+        // Pegando o mair valor de um decímal.
         double maiorPreco = Double.MIN_VALUE;
         if(!estoqueProdutos.isEmpty()){
             for(Produto p : estoqueProdutos.values()){
@@ -88,6 +96,5 @@ public class EstoqueProdutos {
         System.out.println(estoque.obterProdutoMaisCaro());
         System.out.println(estoque.obterProdutoMaisBatato());
         System.out.println(estoque.obterProdutoMaiorQuantidadeValorTotalNoEstoque());
-
     }
 }

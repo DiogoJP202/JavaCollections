@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.NoSuchElementException;
 
 public class LivrariaOnline {
@@ -15,13 +14,15 @@ public class LivrariaOnline {
         this.livros = new HashMap<>();
     }
 
-    public void adicionarLivro(String link, Livro livro) {
-        livros.put(link, livro);
+    public void adicionarLivro(String link, String titulo, String autor, double preco) {
+        livros.put(link, new Livro(titulo, autor, preco));
     }
 
     public void removerLivro(String titulo) {
+        // Criando uma lista com as chaves que precisaram ser removidas.
         List<String> chavesRemover = new ArrayList<>();
         for (Map.Entry<String, Livro> entry : livros.entrySet()) {
+            // Verificando o nome dos títulos.
             if (entry.getValue().getTitulo().equalsIgnoreCase(titulo)) {
                 chavesRemover.add(entry.getKey());
             }
@@ -32,12 +33,16 @@ public class LivrariaOnline {
     }
 
     public Map<String, Livro> exibirLivrosOrdenadosPorPreco() {
+        // Criando uma lista com as chaves e valores das chaves para fazermos a comparação de seus atríbutos.
         List<Map.Entry<String, Livro>> livrosParaOrdenarPorPreco = new ArrayList<>(livros.entrySet());
 
+        // Aplicando a ordenação.
         livrosParaOrdenarPorPreco.sort(new ComparatorPorPreco());
 
+        // LinkedHashMap irá preservar a ordem de inserção.
         Map<String, Livro> livrosOrdenadosPorPreco = new LinkedHashMap<>();
 
+        // Colocando os valores da lista em uma LinkedHashMap.
         for (Map.Entry<String, Livro> entry : livrosParaOrdenarPorPreco) {
             livrosOrdenadosPorPreco.put(entry.getKey(), entry.getValue());
         }
@@ -60,6 +65,7 @@ public class LivrariaOnline {
     }
 
     public Map<String, Livro> pesquisarLivrosPorAutor(String autor) {
+        // Criando uma LinkedHashMap para preservamos os valores.
         Map<String, Livro> livrosPorAutor = new LinkedHashMap<>();
         for (Map.Entry<String, Livro> entry : livros.entrySet()) {
             Livro livro = entry.getValue();
@@ -84,6 +90,7 @@ public class LivrariaOnline {
             throw new NoSuchElementException("A livraria está vazia!");
         }
 
+        // Laço de repeticação para caso haver dois livros com valores iguais.
         for(Map.Entry<String, Livro> entry: livros.entrySet()) {
             if(entry.getValue().getPreco() == precoMaisAlto) {
                 Livro livroComPrecoMaisAlto = livros.get(entry.getKey());
@@ -119,12 +126,12 @@ public class LivrariaOnline {
     public static void main(String[] args) {
         LivrariaOnline livrariaOnline = new LivrariaOnline();
         // Adiciona os livros à livraria online
-        livrariaOnline.adicionarLivro("https://amzn.to/3EclT8Z", new Livro("1984", "George Orwell", 50d));
-        livrariaOnline.adicionarLivro("https://amzn.to/47Umiun", new Livro("A Revolução dos Bichos", "George Orwell", 7.05d));
-        livrariaOnline.adicionarLivro("https://amzn.to/3L1FFI6", new Livro("Caixa de Pássaros - Bird Box: Não Abra os Olhos", "Josh Malerman", 19.99d));
-        livrariaOnline.adicionarLivro("https://amzn.to/3OYb9jk", new Livro("Malorie", "Josh Malerman", 5d));
-        livrariaOnline.adicionarLivro("https://amzn.to/45HQE1L", new Livro("E Não Sobrou Nenhum", "Agatha Christie", 50d));
-        livrariaOnline.adicionarLivro("https://amzn.to/45u86q4", new Livro("Assassinato no Expresso do Oriente", "Agatha Christie", 5d));
+        livrariaOnline.adicionarLivro("https://amzn.to/3EclT8Z","1984", "George Orwell", 50);
+        livrariaOnline.adicionarLivro("https://amzn.to/47Umiun","A Revolução dos Bichos", "George Orwell", 7.05);
+        livrariaOnline.adicionarLivro("https://amzn.to/3L1FFI6", "Caixa de Pássaros - Bird Box: Não Abra os Olhos", "Josh Malerman", 19.99);
+        livrariaOnline.adicionarLivro("https://amzn.to/3OYb9jk","Malorie", "Josh Malerman", 5);
+        livrariaOnline.adicionarLivro("https://amzn.to/45HQE1L", "E Não Sobrou Nenhum", "Agatha Christie", 50);
+        livrariaOnline.adicionarLivro("https://amzn.to/45u86q4", "Assassinato no Expresso do Oriente", "Agatha Christie", 5);
 
         // Exibe todos os livros ordenados por preço
         System.out.println("Livros ordenados por preço: \n" + livrariaOnline.exibirLivrosOrdenadosPorPreco());
